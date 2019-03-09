@@ -3,15 +3,15 @@ from django.conf import settings
 
 
 class StaticStorage(S3Boto3Storage):
-	location = settings.base.AWS_STATIC_LOCATION
+	location = settings.AWS_STATIC_LOCATION
 
 class PublicMediaStorage(S3Boto3Storage):
-	location = settings.base.AWS_PUBLIC_MEDIA_LOCATION
+	location = settings.AWS_PUBLIC_MEDIA_LOCATION
 	file_overwrite = False
 
 
 class PrivateMediaStorage(S3Boto3Storage):
-	location = settings.base.AWS_PRIVATE_MEDIA_LOCATION
+	location = settings.AWS_PRIVATE_MEDIA_LOCATION
 	default_acl = 'private'
 	file_overwrite = False
 	custom_domain = False
