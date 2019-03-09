@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static i18n wagtailcore_tags wagtailuserbar wagtailimages_tags widget_tweaks %}
+
+{% block body_class %}template-submition-page{% endblock %}
+
+{% block extra_css %}
+<style type="text/css">
+	html{
+	{% if page.background_image %}
+		{% image page.background_image original as background_image %}
+			background:url({{ background_image.url }}) no-repeat center center fixed;
+		  -webkit-background-size: cover;
+		  -moz-background-size: cover;
+		  -o-background-size: cover;
+		  background-size: cover;
+	{% else %}
+			background-color: black;
+		}
+{% endif %}
+</style>
+    <link href="{% static 'css/welcome_page.css' %}" rel="stylesheet">
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="centre-block">
+	<div class="container inner-block">
+<!-- main video	
+{% if page.intro_video_id %}
+<div id="intro-video">
+	<iframe id="intro-video-frame" width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ page.intro_video_id }}?controls=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+{% endif %}
+For video in video --->
+<h1 class="text-info headline">{{ page.headline }}</h1>
+<h2>{{ new_user.first_name }}</h2>
+
+{% if page.intro_video_id %}
+<div class="intro-video">
+	<iframe id="grid-intro-video-frame" src="https://www.youtube-nocookie.com/embed/{{ page.intro_video_id }}?controls=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+{% endif %}
+
+{% if form %}
+	<form action="{% pageurl page %}" method="POST">
+	{% csrf_token %}
+		<div class="row mx-1" style="justify-content: center">
+			
+		{% include 'bf_forms.html' with form=form %}
+		</div>
+	<input class='btn btn-info btn-block'type="submit" value="Join the movement!">
+	</form>
+
+{% else %}
+	<h4>You can only fill in the form once</h4>
+{% endif %}
+
+	{% with blocks=self.video_ids %}
+	{% for block in blocks %}
+		{{ block }}
+	{% endfor %}
+	{% endwith %}
+
+	</div>
+	}
+	
+</div>	
+{% endblock content %}
+
+
+<!-- Scripts -->
+{% block extra_js %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script src="{% static 'js/fitText/jquery.fittext.js' %}"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".headline").fitText(1.4);
+		var vid_grid_width = $(".grid-video-frame").width()
+		$(".grid-video-frame").height((vid_grid_width*0.5))
+		var vid_intro_grid_width = $("#grid-intro-video-frame").width()
+		$("#grid-video-frame").height((vid_intro_grid_width*0.5))
+	})
+</script>
+
+{% endblock %}
