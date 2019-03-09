@@ -7,7 +7,7 @@ DEBUG = True
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['*', 'https://whitsundays.herokuapp.com/'] 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
