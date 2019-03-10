@@ -4,7 +4,7 @@ from decouple import config
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', "asdf61(&jz-la=8-u5yf-ay-nid73)#(_a(wqpo#d++jlw%1ou&v")
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['*', 'https://whitsundays.herokuapp.com/'] 
 
