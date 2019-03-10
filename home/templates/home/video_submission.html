@@ -19,6 +19,7 @@
 {% endif %}
 </style>
     <link href="{% static 'css/welcome_page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fancy_btn.css' %}" rel="stylesheet">
 {% endblock extra_css %}
 
 {% block content %}
@@ -41,19 +42,7 @@ For video in video --->
 </div>
 {% endif %}
 
-{% if form %}
-	<form action="{% pageurl page %}" method="POST">
-	{% csrf_token %}
-		<div class="row mx-1" style="justify-content: center">
-			
-		{% include 'bf_forms.html' with form=form %}
-		</div>
-	<input class='btn btn-info btn-block'type="submit" value="Join the movement!">
-	</form>
 
-{% else %}
-	<h4>You can only fill in the form once</h4>
-{% endif %}
 <div class="container" style="justify-content: center">
 	
 <div class="row" style="width: 100%; justify-content: center;margin: 0 auto">
@@ -66,7 +55,27 @@ For video in video --->
 </div>
 </div>
 
+<button id="video-modal-btn" class="fancy-btn btn-info">Submit your opinion!</button>
+
+<div id="videoModal" class="modal">
+	<div class="modal-content">
+		<span id="video_modal_close" class="close">&times;</span>
+		{% if form %}
+			<form action="{% pageurl page %}" method="POST">
+			{% csrf_token %}
+			<div class="row mx-1" style="justify-content: center">
+
+				{% include 'bf_forms.html' with form=form %}
+			</div>
+			<input class='fancy-btn btn-info btn-block'type="submit" value="Share the wonder!">
+			</form>
+
+			{% else %}
+				<h4>You can only fill in the form once</h4>
+		{% endif %}
 	</div>
+</div>
+</div>
 	
 </div>	
 {% endblock content %}
@@ -80,6 +89,7 @@ For video in video --->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
 <script src="{% static 'js/fitText/jquery.fittext.js' %}"></script>
+<script src="{% static 'js/fancy_btn.js' %}"></script>
 <script type="text/javascript">
 	$(function(){
 		$(".headline").fitText(1.4);
@@ -87,7 +97,46 @@ For video in video --->
 		$(".grid-video-frame").height((vid_grid_width*0.6))
 		var vid_intro_grid_width = $("#grid-intro-video-frame").width()
 		$("#grid-intro-video-frame").height((vid_intro_grid_width*0.6))
+
+		//improving upload file button
+		$('#id_video').addClass('fancy_btn')
+
+		//bmodal
+		//get modal
+		var modal = $('#videoModal');
+
+		//get btn opening modal
+		var modal_btn = $('#video-modal-btn');
+
+		//get <span> element that closes modal
+		var span = $('#video_modal_close');
+
+		//when user clicks on btn open modal
+
+	modal_btn.click(function(){
+	$('#videoModal').css("display","block");
 	})
+
+	//when user clicks on (x) close modal
+	span.click(function(){
+	$('#videoModal').css("display","none");
+	})
+	//if user clicks anywhere else close modal
+	$(window).click(function(event){
+		var modal_display = $('#videoModal').css('display')
+//	if ((modal_display =='block')){
+//		console.log('block')
+//		if (!(event.target == $('#videoModal'))){
+//			console.log('got here')
+//			$('#videoModal').css("display","none");
+//		}
+	//}
+	console.log(event.target);
+	if (event.target.id == $('#videoModal').attr('id')){
+		$('#videoModal').css("display","none");
+	}
+	})
+})
 </script>
 
 {% endblock %}

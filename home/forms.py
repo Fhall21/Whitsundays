@@ -4,14 +4,13 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 
-from home.models import Video
-
+from home.models import VideoData
 
 
 class videoUploadForm(forms.ModelForm):
 
 	class Meta:
-		model = Video
+		model = VideoData
 		fields = ['name', 'video']
 
 class UserCreateForm(UserCreationForm):

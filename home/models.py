@@ -1,6 +1,8 @@
 import json, random
 
 from django.conf import settings
+from django import forms
+
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 from django.core.serializers.json import DjangoJSONEncoder
@@ -19,7 +21,24 @@ from wagtail.admin.edit_handlers import (FieldPanel, FieldRowPanel,
                                          StreamFieldPanel)
 
 from home.blocks import VideoIdsBlock
+#from home.forms import videoUploadForm
 from modelcluster.fields import ParentalKey
+
+class VideoData(models.Model):
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=80, blank=False, null=True)
+    #make into public/private repo
+    video = models.FileField(upload_to='videos/', null=True, verbose_name="") 
+
+    def __str__(self):
+        return self.name
+
+#was unable to use it within forms.py for some reason
+class videoUploadForm(forms.ModelForm):
+
+    class Meta:
+        model = VideoData
+        fields = ['name', 'video']
 
 
 class PasswordlessAuthBackend(ModelBackend):
@@ -43,13 +62,6 @@ class PasswordlessAuthBackend(ModelBackend):
     def __str__(self):
         return self.name
 '''
-class Video(models.Model):
-    uploader = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=80, blank=False, null=True)
-    video = models.FileField(upload_to='videos/', null=True, verbose_name="") 
-
-    def __str__(self):
-        return self.name
 
 class VideoSubmission(Page):
     headline = models.CharField(max_length=200, null=True, blank=True)
@@ -75,6 +87,7 @@ class VideoSubmission(Page):
     def serve(self, request):
 
         if request.method == 'GET':
+            form = videoUploadForm()
             #retreiving user from session variables
             new_user_username = request.session.get('new_user_username', None)
             try:
@@ -82,6 +95,7 @@ class VideoSubmission(Page):
                 arg = {
                 'new_user':new_user,
                 'page': self,
+                'form': form,
                 }
             except User.DoesNotExist:
                 arg = {'page': self}
