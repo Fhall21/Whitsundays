@@ -202,18 +202,33 @@ svg:not(:root) {
         max-width: 100px;
     }
 }
-
-.centre-block{
+.video-centre-block {
     position: relative;
-    left: 25vw;
+    left: 20vw;
     top: 5vw;
-    width: 50vw;
+    width: 60vw;
     height: auto;
 
     padding-top: 2vh;
     padding-bottom: 2vh;
-    padding-right: 7vw;
-    padding-left: 7vw;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    background-color: white !important;
+
+    text-align: center;
+}
+
+.centre-block{
+    position: relative;
+    left: 20vw;
+    top: 5vw;
+    width: 60vw;
+    height: auto;
+
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-right: 5vw;
+    padding-left: 5vw;
     background-color: white !important;
 
     text-align: center;
@@ -229,18 +244,17 @@ svg:not(:root) {
 
 #intro-video-frame{
     position: relative;
-    left: -15vw;
-    width: calc(100% + 28vw);
+    width: calc(100%);
     height: auto;
 
 
 }
 
 #grid-intro-video-frame{
-    width: 45vw;
+    width: 100%;
     height: auto;
     position: relative;
-    right: 5vw;
+    /*right: 5vw; /*
 }
 
 .grid-video-frame{

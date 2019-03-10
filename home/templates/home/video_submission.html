@@ -23,7 +23,7 @@
 
 {% block content %}
 
-<div class="centre-block">
+<div class="video-centre-block">
 	<div class="container inner-block">
 <!-- main video	
 {% if page.intro_video_id %}
@@ -54,13 +54,16 @@ For video in video --->
 {% else %}
 	<h4>You can only fill in the form once</h4>
 {% endif %}
-<div class="row" style="width: 100%; justify-content: center">
+<div class="container" style="justify-content: center">
+	
+<div class="row" style="width: 100%; justify-content: center;margin: 0 auto">
 	
 	{% with blocks=page.video_ids %}
 	{% for block in blocks %}
 		{{ block }}
 	{% endfor %}
 	{% endwith %}
+</div>
 </div>
 
 	</div>
