@@ -33,6 +33,26 @@
 	<p>We have recieved your entry</p>
 	</div>
 {% endif %}
+
+{% if errors %}
+	<div class="alert alert-danger" style="text-align: left;">
+	<h2>Oh No!</h2>
+	<p>We had some errors. Check the following fields:</p>
+	{% for error in errors %}
+	<ul>
+	{% for detail in error %}
+		{% if forloop.first %}
+		<li>{{ detail }}</li>
+		{% else %}
+		<ul>
+			<li>{{ detail }}</li>
+		</ul>
+		{% endif %}
+		{% endfor %}
+		{% endfor %}
+		</ul>
+	</div>
+{% endif %}
 <!-- main video	
 {% if page.intro_video_id %}
 <div id="intro-video">

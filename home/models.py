@@ -101,22 +101,20 @@ class VideoSubmission(Page):
                 arg = {'page': self}
             request.session['new_user'] = None
         elif request.method == 'POST':
+            arg = {'page': self, 'new_user': request.user}
             form = videoUploadForm(request.POST)
             print (form)
             _user = request.POST.get('user')
             print (_user)
             if form.is_valid():
                 form.save(commit=False)
-                print ('1')
                 try:
                     user = User.objects.get(username=_user)
                 except User.DoesNotExist:
                     user = None
                 name = form.cleaned_data['name']
                 video = form.cleaned_data['video']
-                print ('3')
                 form.save()
-                print ('2')
                 arg = {
                 'form': videoUploadForm(),
                 'page': 'self',
@@ -128,10 +126,19 @@ class VideoSubmission(Page):
                 errors = form.errors
                 print (errors)
                 error_list = []
+                counter = 0
                 for error in errors:
-                    error_list.append(list(error))
+                    error_list.append([error])
+                    for error_detail in errors[error]:
+                        error_list[counter].append(error_detail)
+                    counter += 1
                 print ('errors list: {}'.format(error_list))
-            arg = {'page': self, 'new_user': request.user}
+                arg = {
+                'form': videoUploadForm(),
+                'page': self,
+                'new_user': request.user,
+                'errors': error_list,
+                }                
         return render(request, 'home/video_submission.html', arg)
 
 
