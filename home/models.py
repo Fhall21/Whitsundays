@@ -100,7 +100,41 @@ class VideoSubmission(Page):
             except User.DoesNotExist:
                 arg = {'page': self}
             request.session['new_user'] = None
-            return render(request, 'home/video_submission.html', arg)
+        elif request.method == 'POST':
+            form = videoUploadForm(request.POST)
+            print (form)
+            _user = request.POST.get('user')
+            print (_user)
+            if form.is_valid():
+                form.save(commit=False)
+                print ('1')
+                try:
+                    user = User.objects.get(username=_user)
+                except User.DoesNotExist:
+                    user = None
+                name = form.cleaned_data['name']
+                video = form.cleaned_data['video']
+                print ('3')
+                form.save()
+                print ('2')
+                arg = {
+                'form': videoUploadForm(),
+                'page': 'self',
+                'new_user': request.user,
+                'success': True,
+                }
+                return render(request, 'home/video_submission.html', arg)
+            else:
+                errors = form.errors
+                print (errors)
+                error_list = []
+                for error in errors:
+                    error_list.append(list(error))
+                print ('errors list: {}'.format(error_list))
+            arg = {'page': self, 'new_user': request.user}
+        return render(request, 'home/video_submission.html', arg)
+
+
 class HomePage(Page):
     headline = models.CharField(max_length=200, null=True, blank=True)
     intro_video_id = models.CharField(max_length=50, null=True, blank=True)

@@ -26,6 +26,13 @@
 
 <div class="video-centre-block">
 	<div class="container inner-block">
+		
+{% if success %}
+	<div class="alert alert-info">
+	<h2>Success!</h2>
+	<p>We have recieved your entry</p>
+	</div>
+{% endif %}
 <!-- main video	
 {% if page.intro_video_id %}
 <div id="intro-video">
@@ -66,6 +73,7 @@ For video in video --->
 			<div class="row mx-1" style="justify-content: center">
 
 				{% include 'bf_forms.html' with form=form %}
+				<input type="hidden" name="user" value='{{ new_user.username }}'>
 			</div>
 			<input class='fancy-btn btn-info btn-block'type="submit" value="Share the wonder!">
 			</form>
