@@ -11,4 +11,4 @@ class VideoIdsBlock(blocks.StructBlock):
     video_ids = blocks.CharBlock()
 
     class Meta:
-        template = 'home/blocks/video_grid.html'
+        template = 'home/blocks/grid_video_block.html'

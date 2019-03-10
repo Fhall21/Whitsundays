@@ -1,9 +1,6 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-<div class="col logo align-self-center" style="text-align: center;">
-    <div class="grid-videos">
-	<iframe class="grid-video-frame" src="https://www.youtube-nocookie.com/embed/{{ self.video_ids }}?controls=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-    </div>
+<div class="col-md-6 align-self-center" style="text-align: center;">
+	<iframe class="grid-video-frame mx-0" src="https://www.youtube-nocookie.com/embed/{{ self.video_ids }}?controls=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 

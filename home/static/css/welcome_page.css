@@ -236,12 +236,14 @@ svg:not(:root) {
 
 }
 
-#grid-intro-video{
-    width: 90%;
+#grid-intro-video-frame{
+    width: 45vw;
     height: auto;
+    position: relative;
+    right: 5vw;
 }
 
 .grid-video-frame{
-    width: 30vw;
+    width: 100%;
     height: auto;
 }

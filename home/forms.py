@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+
+
 from home.models import Video
 
 
@@ -17,6 +20,10 @@ class UserCreateForm(UserCreationForm):
 	class Meta:
 	    model = User
 	    fields = ('first_name','last_name','username','email', 'password1', 'password2')
+
+	    labels = {
+	    'last_name': _('Last name (optional)'),
+	    }
 
 	def __init__(self, *args, **kwargs):
 	    super(UserCreateForm,self).__init__(*args, **kwargs)

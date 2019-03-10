@@ -54,15 +54,16 @@ For video in video --->
 {% else %}
 	<h4>You can only fill in the form once</h4>
 {% endif %}
-
-	{% with blocks=self.video_ids %}
+<div class="row" style="width: 100%; justify-content: center">
+	
+	{% with blocks=page.video_ids %}
 	{% for block in blocks %}
 		{{ block }}
 	{% endfor %}
 	{% endwith %}
+</div>
 
 	</div>
-	}
 	
 </div>	
 {% endblock content %}
@@ -80,9 +81,9 @@ For video in video --->
 	$(function(){
 		$(".headline").fitText(1.4);
 		var vid_grid_width = $(".grid-video-frame").width()
-		$(".grid-video-frame").height((vid_grid_width*0.5))
+		$(".grid-video-frame").height((vid_grid_width*0.6))
 		var vid_intro_grid_width = $("#grid-intro-video-frame").width()
-		$("#grid-video-frame").height((vid_intro_grid_width*0.5))
+		$("#grid-intro-video-frame").height((vid_intro_grid_width*0.6))
 	})
 </script>
 
