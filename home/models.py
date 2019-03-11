@@ -28,7 +28,7 @@ class VideoData(models.Model):
     uploader = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=80, blank=False, null=True)
     #make into public/private repo
-    video = models.FileField(upload_to='videos/', null=True, verbose_name="") 
+    video = models.FileField() 
 
     def __str__(self):
         return self.name
